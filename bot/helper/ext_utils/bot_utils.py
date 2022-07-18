@@ -21,16 +21,16 @@ PAGE_NO = 1
 
 
 class MirrorStatus:
-    STATUS_UPLOADING = "Uploading...📤"
-    STATUS_DOWNLOADING = "Downloading...📥"
-    STATUS_CLONING = "Cloning...♻️"
-    STATUS_WAITING = "Queued...💤"
-    STATUS_PAUSE = "Paused...⛔️"
-    STATUS_ARCHIVING = "Archiving...🔐"
-    STATUS_EXTRACTING = "Extracting...📂"
-    STATUS_SPLITTING = "Splitting...✂️"
-    STATUS_CHECKING = "CheckingUp...📝"
-    STATUS_SEEDING = "Seeding...🌧"
+    STATUS_UPLOADING = "Mengunggah...📤"
+    STATUS_DOWNLOADING = "Mengunduh...📥"
+    STATUS_CLONING = "Kloning...♻️"
+    STATUS_WAITING = "DiAntrikan...💤"
+    STATUS_PAUSE = "Berhenti Sebentar...⛔️"
+    STATUS_ARCHIVING = "Pengarsipan...🔐"
+    STATUS_EXTRACTING = "Mengekstrak...📂"
+    STATUS_SPLITTING = "Pemisahan...✂️"
+    STATUS_CHECKING = "Memeriksa...📝"
+    STATUS_SEEDING = "Penyemaian Torrent...🌧"
 
 SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
@@ -102,9 +102,9 @@ def get_progress_bar_string(status):
     p = 0 if total == 0 else round(completed * 100 / total)
     p = min(max(p, 0), 100)
     cFull = p // 8
-    p_str = '■' * cFull
-    p_str += '□' * (12 - cFull)
-    p_str = f"[{p_str}]"
+    p_str = '◈' * cFull
+    p_str += '◇' * (12 - cFull)
+    p_str = f"⇄{p_str}"
     return p_str
 
 def get_readable_message():
@@ -158,7 +158,7 @@ def get_readable_message():
             if STATUS_LIMIT is not None and index == STATUS_LIMIT:
                 break
         if len(msg) == 0:
-            return None, None
+            return None
         bmsg = f"<b>CPU:</b> {cpu_percent()}% | <b>FREE:</b> {get_readable_file_size(disk_usage(DOWNLOAD_DIR).free)}"
         bmsg += f"\n<b>RAM:</b> {virtual_memory().percent}% | <b>UPTIME:</b> {get_readable_time(time() - botStartTime)}"
         dlspeed_bytes = 0
